@@ -120,13 +120,23 @@ REST_FRAMEWORK = {
     ],
 }
 
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
+
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Vite dev server
-    "http://localhost:3000",  # Alternative frontend
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:3000",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_METHODS = [
     'DELETE',
