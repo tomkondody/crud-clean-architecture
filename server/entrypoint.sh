@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Wait for PostgreSQL to be ready
-echo "Waiting for PostgreSQL..."
-while ! nc -z db 5432; do
-  sleep 0.1
-done
-echo "PostgreSQL started"
+# Wait for database if DATABASE_URL is not set (assuming local 'db' container)
+if [ -z "$DATABASE_URL" ]; then
+  echo "Waiting for local PostgreSQL..."
+  while ! nc -z db 5432; do
+    sleep 0.1
+  done
+  echo "Local PostgreSQL started"
+fi
 
 # Run migrations
 echo "Running migrations..."
